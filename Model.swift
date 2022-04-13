@@ -57,3 +57,10 @@ struct QuestionList{
         return false
     }
 }
+
+class GameSettings:ObservableObject{
+    @Published var score:Int = 0
+    @Published var index:Int = 0
+    @Published var previousIndex:Int = -1
+
+}
