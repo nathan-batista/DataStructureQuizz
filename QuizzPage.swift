@@ -12,7 +12,7 @@ import SwiftUI
 struct QuizzView:View{
     var question:Question
     @State var isActive = false
-    @ObservedObject var settings:GameSettings
+    @StateObject var settings:GameSettings
     var body: some View{
         ZStack{
             Color.gray.opacity(0.09)
@@ -26,37 +26,13 @@ struct QuizzView:View{
                     Text(question.question)
                         .font(.title2)
                         .fontWeight(.bold)
-                        .padding(.top,20)
+                        .padding()
                 }
                 Spacer()
                 VStack(spacing:15){
-                        Button(action: {
-                            if QuestionList().verifyAnswerIsCorrect(question.option1,question.answer){
-                                if settings.previousIndex != settings.index {
-                                    settings.score += 1
-                                }
-                            }
-                            settings.previousIndex = settings.index
-                            settings.index = settings.index < (QuestionList.questions.count - 1) ? settings.index+1 : settings.index
-                            isActive = settings.index < (QuestionList.questions.count - 1) ? true : false
-                        },label: {
-                            QuestionButton(option: question.option1)
-                            }
-                        )
-                        Button(action: {
-                            if QuestionList().verifyAnswerIsCorrect(question.option2,question.answer){
-                                if settings.previousIndex != settings.index {
-                                    settings.score += 1
-                                }
-                            }
-                            settings.previousIndex = settings.index
-                            settings.index = settings.index < (QuestionList.questions.count - 1) ? settings.index+1 : settings.index
-                            isActive = settings.index < (QuestionList.questions.count - 1) ? true : false
-                        },label: {
-                            QuestionButton(option: question.option2)
-                            }
-                        )
-                    
+                    ForEach(question.option, id: \.self ){ option in
+                        QuestionButton(option: option, answer: question.answer, isActive: $isActive, settings: settings)
+                    }
                     NavigationLink(destination: QuizzView(question: QuestionList.questions[settings.index], settings: settings), isActive: $isActive){}.navigationBarBackButtonHidden(true)
                 }
                 .padding(.bottom,30)
@@ -80,15 +56,29 @@ struct QuizzPageView_Previews: PreviewProvider {
     }
 }
 
-
 struct QuestionButton:View{
     var option:String
-    var body : some View {
-        Text(option)
-            .padding(10)
-            .foregroundColor(Color.black)
-            .background(Color.blue)
-            .cornerRadius(10)
+    var answer:String
+    @Binding var isActive:Bool
+    @StateObject var settings:GameSettings
+    var body: some View{
+        Button(action: {
+            if QuestionList().verifyAnswerIsCorrect(option,answer){
+                if settings.previousIndex != settings.index {
+                    settings.score += 1
+                }
+            }
+            settings.previousIndex = settings.index
+            settings.index = settings.index < (QuestionList.questions.count - 1) ? settings.index+1 : settings.index
+            isActive = settings.index < (QuestionList.questions.count - 1) ? true : false
+        },label: {
+            Text(option)
+                .padding(10)
+                .foregroundColor(Color.black)
+                .background(Color.blue)
+                .cornerRadius(10)
+            }
+        )
     }
 }
 

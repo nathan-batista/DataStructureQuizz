@@ -19,7 +19,7 @@ struct DataStructure{
 
 struct DataStructureList{
     static let list = [
-        DataStructure(name: "Vector", image: "globe", description: "lorem ipsum bla bla bla bla"),
+        DataStructure(name: "Array", image: "globe", description: "lorem ipsum bla bla bla bla"),
         DataStructure(name: "Queue", image: "globe", description: "lorem ipsum bla bla bla bla"),
         DataStructure(name: "Stack", image: "globe", description: "lorem ipsum bla bla bla bla")
     ]
@@ -28,8 +28,7 @@ struct DataStructureList{
 
 struct Question{
     var question:String
-    var option1:String
-    var option2:String
+    var option : [String]
     var answer:String
 }
 
@@ -37,16 +36,13 @@ struct Question{
 struct QuestionList{
     static let questions = [
         Question(question: "Which structure follows the order FIFO(First In First Out)?",
-                 option1: "Queue",
-                 option2: "Stack",
+                 option:["Queue","Stack"],
                  answer: "Queue"),
         Question(question:"Which structure follows the order LIFO(Last in First Out)?",
-                 option1: "Queue",
-                option2: "Stack",
+                 option:["Queue","Stack"],
                 answer: "Stack"),
         Question(question:"Which structure has time complexity O(1) to remove the Last element?",
-                 option1:"Queue",
-                 option2:"Stack",
+                 option:["Queue","Stack","Array"],
                  answer:"Stack")
     ]
     
