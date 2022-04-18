@@ -13,11 +13,18 @@ struct MainView:View{
     var body:some View{
         TabView{
             ContentView().tabItem{
-                Label("Structures",systemImage: "globe")
-                
+                Label{Text("Structures")}
+            icon: {Image("DataStructure")
+                .resizable()
+                .scaledToFit()
+            }
             }
             QuizzPageView().tabItem{
-                Label("Quizz",systemImage: "globe")
+                Label{Text("Quiz")}
+                    icon: {Image("Quiz")
+                            .resizable()
+                            .scaledToFit()
+                    }
             }
         }
     }

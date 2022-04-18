@@ -11,13 +11,14 @@ struct DataStructureDetail:View{
     var structure:DataStructure
     var body: some View {
             VStack(spacing:10){
-                Image(systemName: structure.image)
+                Image(structure.image)
+                    .resizable()
                     .scaledToFit()
                     .frame(minWidth: 50, idealWidth: 150, maxWidth: 200)
                     .foregroundColor(.accentColor)
                 Text(structure.description)
                     .font(.body)
-                    .padding()
+                    .padding([.leading,.trailing],10)
             }.navigationTitle(structure.name)
     }
 }

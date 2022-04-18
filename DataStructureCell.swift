@@ -11,7 +11,8 @@ struct DataStructureCell:View{
     var structure:DataStructure
     var body: some View {
         HStack(spacing:15){
-            Image(systemName: structure.image)
+            Image(structure.image)
+                .resizable()
                 .scaledToFit()
                 .frame(maxWidth:50)
                 .foregroundColor(.accentColor)
