@@ -77,9 +77,6 @@ struct QuestionButton:View{
             question = QuestionList.questions[settings.index]
             if(settings.index == (QuestionList.questions.count - 1)){
                 settings.ranking.append(Ranking(score: settings.score))
-                settings.index = 0
-                settings.score = 0
-                settings.previousIndex = -1
                 endGame = true
             }
         },label: {

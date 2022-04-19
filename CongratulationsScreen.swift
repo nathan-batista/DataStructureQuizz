@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Congratulations:View{
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var settings:GameSettings
     var body : some View {
         VStack{
@@ -25,9 +26,16 @@ struct Congratulations:View{
                 .fontWeight(.semibold)
                 .padding()
             Button(action: {
-                
+                settings.index = 0
+                settings.score = 0
+                settings.previousIndex = -1
+                presentationMode.wrappedValue.dismiss()
             }, label: {
-                
+                Text("Play Again")
+                    .padding(10)
+                    .foregroundColor(Color.black)
+                    .background(Color.blue)
+                    .cornerRadius(10)
             } )
         }.navigationBarBackButtonHidden(true)
     }
