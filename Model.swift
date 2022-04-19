@@ -12,6 +12,11 @@
  Stack : https://www.flaticon.com/premium-icon/layers_3171678
  DataStructure icon: https://iconscout.com/icon/hierarchy-3004675
  Quiz : https://www.flaticon.com/free-icon/quiz_5705144?term=quiz&page=1&position=79&page=1&position=79&related_id=5705144&origin=tag
+ Data Structure Icon: https://www.flaticon.com/premium-icon/hierarchical-structure_1324351?term=data%20structure&page=1&position=13&page=1&position=13&related_id=1324351&origin=tag#
+ 
+ confetti icon : https://www.flaticon.com/free-icon/party_2824564?term=confetti&page=1&position=20&page=1&position=20&related_id=2824564&origin=tag
+ 
+ Ranking icon https://www.flaticon.com/free-icon/ranking_3629632?term=ranking&page=1&position=1&page=1&position=1&related_id=3629632&origin=tag
  */
 
 
@@ -35,6 +40,11 @@ struct DataStructureList{
         DataStructure(name: "Stack", image: "Stack", description: "Stack is a kind of data structure that follows an order of how the operations are made(insertion, deletion). The order that the Queue follows is the LIFO(Last in First Out), which means that if you try to remove an item, the item removed will be the last item that you inserted in the Stack.\nNow that we know how the Stack works, what else we know ? Well, we can talk about how much time we spend when inserting or removing an element from the Stack. We can implement a Stack using an array. With this kind of implementation we have a time complexity of O(1) when inserting an element and O(1) when removing an element. We can use to do the parentheses balancing, calculation and conversion of notations and recursion."),
         DataStructure(name: "Binary Search Tree", image: "Binary Search Tree", description: "Binary Search Tree is a tree that has a maximum of 2 children per leaf. In the binary search tree the left leaf(node) has its value lower than its father and the right has its value higher than its father.\nThe biggest advantage of the Binary search tree is that if the tree is height-balanced, to search for an element it will take O(log n) but in the worst case it can take O(n) because the tree can turn into a linked list.")
     ]
+}
+
+struct Ranking{
+    var id = UUID()
+    var score:Int
 }
 
 
@@ -76,5 +86,6 @@ class GameSettings:ObservableObject{
     @Published var score:Int = 0
     @Published var index:Int = 0
     @Published var previousIndex:Int = -1
+    var ranking:[Ranking] = []
 
 }

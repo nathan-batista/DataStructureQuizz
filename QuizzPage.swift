@@ -10,13 +10,12 @@ import SwiftUI
 
 
 struct QuizzView:View{
-    var question:Question
+    @State var question:Question
+    @State var endGame = false
     @State var isActive = false
-    @StateObject var settings:GameSettings
+    @ObservedObject var settings:GameSettings
     var body: some View{
         ZStack{
-            Color.gray.opacity(0.09)
-                .ignoresSafeArea()
             VStack{
                 VStack(spacing:10){
                     Text("Score: \(settings.score)")
@@ -31,9 +30,12 @@ struct QuizzView:View{
                 Spacer()
                 VStack(spacing:15){
                     ForEach(question.option, id: \.self ){ option in
-                        QuestionButton(option: option, answer: question.answer, isActive: $isActive, settings: settings)
+                        QuestionButton(option: option, answer: question.answer, question: $question, isActive: $isActive, endGame: $endGame, settings: settings)
                     }
-                    NavigationLink(destination: QuizzView(question: QuestionList.questions[settings.index], settings: settings), isActive: $isActive){}.navigationBarBackButtonHidden(true)
+                
+                    NavigationLink(destination:Congratulations(settings: settings),isActive:$endGame){
+                    }
+                    .navigationBarBackButtonHidden(true)
                 }
                 .padding(.bottom,30)
             }
@@ -42,7 +44,7 @@ struct QuizzView:View{
 }
 
 struct QuizzPageView : View {
-    var gameOption = GameSettings()
+    @StateObject var gameOption:GameSettings
     var body: some View{
         NavigationView{
             QuizzView(question: QuestionList.questions.first!, settings: gameOption)
@@ -52,14 +54,16 @@ struct QuizzPageView : View {
 
 struct QuizzPageView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizzPageView()
+        QuizzPageView(gameOption: GameSettings())
     }
 }
 
 struct QuestionButton:View{
     var option:String
     var answer:String
+    @Binding var question:Question
     @Binding var isActive:Bool
+    @Binding var endGame:Bool
     @StateObject var settings:GameSettings
     var body: some View{
         Button(action: {
@@ -70,7 +74,14 @@ struct QuestionButton:View{
             }
             settings.previousIndex = settings.index
             settings.index = settings.index < (QuestionList.questions.count - 1) ? settings.index+1 : settings.index
-            isActive = settings.index < (QuestionList.questions.count - 1) ? true : false
+            question = QuestionList.questions[settings.index]
+            if(settings.index == (QuestionList.questions.count - 1)){
+                settings.ranking.append(Ranking(score: settings.score))
+                settings.index = 0
+                settings.score = 0
+                settings.previousIndex = -1
+                endGame = true
+            }
         },label: {
             Text(option)
                 .padding(10)

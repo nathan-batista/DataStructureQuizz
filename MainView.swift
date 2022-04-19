@@ -10,21 +10,21 @@ import SwiftUI
 
 
 struct MainView:View{
+    var gameSettings = GameSettings()
     var body:some View{
         TabView{
             ContentView().tabItem{
-                Label{Text("Structures")}
-            icon: {Image("DataStructure")
-                .resizable()
-                .scaledToFit()
+                Image("DataStructure")
+                Text("Structures")
+                }
+            
+            QuizzPageView(gameOption: gameSettings).tabItem{
+                Image("Quiz")
+                Text("Quiz")
             }
-            }
-            QuizzPageView().tabItem{
-                Label{Text("Quiz")}
-                    icon: {Image("Quiz")
-                            .resizable()
-                            .scaledToFit()
-                    }
+            RankingList(settings: gameSettings).tabItem{
+                Image("ranking")
+                Text("Ranking")
             }
         }
     }
