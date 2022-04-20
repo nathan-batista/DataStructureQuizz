@@ -9,8 +9,13 @@ import Foundation
 import SwiftUI
 
 struct Congratulations:View{
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var endGame : Bool
     @StateObject var settings:GameSettings
+    init(_ endGame: Binding<Bool>, _ settings:GameSettings){
+        self._endGame = endGame
+        self._settings = StateObject(wrappedValue: settings)  
+    }
+    
     var body : some View {
         VStack{
             Image("party")
@@ -29,7 +34,7 @@ struct Congratulations:View{
                 settings.index = 0
                 settings.score = 0
                 settings.previousIndex = -1
-                presentationMode.wrappedValue.dismiss()
+                self.endGame = false
             }, label: {
                 Text("Play Again")
                     .padding(10)
@@ -37,13 +42,13 @@ struct Congratulations:View{
                     .background(Color.blue)
                     .cornerRadius(10)
             } )
-        }.navigationBarBackButtonHidden(true)
+        }
     }
 }
 
 
 struct Congratulations_Previews: PreviewProvider {
     static var previews: some View {
-        Congratulations(settings:  GameSettings() )
+        Congratulations(.constant(true),GameSettings())
     }
 }

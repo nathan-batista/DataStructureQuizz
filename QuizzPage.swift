@@ -9,47 +9,50 @@
 import SwiftUI
 import UIKit
 
-
 struct QuizzView:View{
     @State var question:Question
     @State var endGame = false
-    @ObservedObject var settings:GameSettings
+    @StateObject var settings:GameSettings
     var body: some View{
         ZStack{
-            VStack{
-                VStack(spacing:10){
-                    Text("Score: \(settings.score)")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Text(question.question)
-                        .font(.title2)
+            Color.init(UIColor.systemGray6)
+            if !endGame {
+                VStack{
+                    Text("Question \(settings.index + 1)")
+                        .font(.title)
                         .fontWeight(.bold)
-                        .padding()
-                }
-                Spacer()
-                VStack(spacing:15){
-                    ForEach(question.option.shuffled(), id: \.self ){ option in
-                        QuestionButton(option: option, answer: question.answer, question: $question, endGame: $endGame, settings: settings)
+                        .padding(.top,20)
+                    VStack(spacing:10){
+                        Text("Score: \(settings.score)")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing,20)
+                        Text(question.question)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding()
                     }
-                
-                    NavigationLink(destination:Congratulations(settings: settings),isActive:$endGame){
+                    Spacer()
+                    VStack(spacing:15){
+                        ForEach(question.option.shuffled(), id: \.self ){ option in
+                            QuestionButton(option: option, answer: question.answer, question: $question, endGame: $endGame, settings: settings)
+                        }
                     }
-                    .navigationBarBackButtonHidden(true)
+                    .padding(.bottom,30)
                 }
-                .padding(.bottom,30)
+            } else {
+                Congratulations($endGame,settings)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
             }
-        }.navigationTitle("Question \(settings.index+1)")
-            .background(Color.init(UIColor.systemGray6))
+        }
     }
 }
 
 struct QuizzPageView : View {
     @StateObject var gameOption:GameSettings
     var body: some View{
-        NavigationView{
             QuizzView(question: QuestionList.questions.first!, settings: gameOption)
-        }
     }
 }
 

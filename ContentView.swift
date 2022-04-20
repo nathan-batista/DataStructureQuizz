@@ -3,13 +3,17 @@ import SwiftUI
 struct ContentView: View {
     var structures:[DataStructure] = DataStructureList.list
     var body: some View {
-        NavigationView{
-            List(structures, id: \.id){ structure in
-                NavigationLink(destination: DataStructureDetail(structure: structure), label: {
-                    DataStructureCell(structure: structure)
-                })
-            }.navigationTitle("Data Structures")
-        }.background(Color.gray.opacity(0.5))
+        ZStack{
+            //Color.init(UIColor.systemGray6)
+            NavigationView{
+                List(structures, id: \.id){ structure in
+                    NavigationLink(destination: DataStructureDetail(structure: structure), label: {
+                        DataStructureCell(structure: structure)
+                    })
+                }.navigationTitle("Data Structures")
+                DataStructureDetail(structure: structures.first!)
+            }
+        }
     }
 }
 

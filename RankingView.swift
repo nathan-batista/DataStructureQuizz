@@ -15,9 +15,11 @@ struct RankingCell:View{
             Text("You scored: \(score.score)/\(QuestionList.questions.count) points")
                 .lineLimit(1)
                 .layoutPriority(1)
+            Spacer()
             Image(getNameImageScore(score.score))
                 .resizable()
                 .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width*0.2,alignment: .trailing)
         }
     }
     
@@ -45,17 +47,30 @@ struct RankingList : View{
     @StateObject var settings:GameSettings
     var body:some View{
         ZStack{
-            if(!settings.ranking.isEmpty){
-                List(settings.ranking.reversed(),id:\.id){ ranking in
-                    RankingCell(score: ranking)
-                }.background(Color.init(UIColor.systemGray6))
-            } else {
-                Text("You haven't played yet.")
-                    .font(.body)
-                    .foregroundColor(Color.secondary)
-                    .padding([.leading,.trailing],30)
+            Color.init(UIColor.systemGray6)
+            VStack{
+                if(!settings.ranking.isEmpty){
+                    Text("Scores")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.top,20)
+                    List(settings.ranking.reversed(),id:\.id){ ranking in
+                        RankingCell(score: ranking)
+                    }
+                } else {
+                    Text("Scores")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.top,20)
+                    Spacer()
+                    Text("You haven't played yet.")
+                        .font(.body)
+                        .foregroundColor(Color.secondary)
+                        .padding([.leading,.trailing],30)
+                    Spacer()
+                }
             }
-        }.navigationTitle("Scores")
+        }
         
     }
     
@@ -64,8 +79,6 @@ struct RankingList : View{
 struct RankingView:View{
     @StateObject var settings:GameSettings
     var body : some View {
-        NavigationView{
             RankingList(settings: settings)
-        }
     }
 }
