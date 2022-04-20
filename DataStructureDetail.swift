@@ -14,11 +14,13 @@ struct DataStructureDetail:View{
                 Image(structure.image)
                     .resizable()
                     .scaledToFit()
-                    .frame(minWidth: 50, idealWidth: 150, maxWidth: 200)
+                    .frame(width: UIScreen.main.bounds.width/3, alignment: .center)
+                    .padding(.top,UIScreen.main.bounds.height*0.1)
                     .foregroundColor(.accentColor)
                 Text(structure.description)
                     .font(.body)
                     .padding([.leading,.trailing],10)
+                Spacer()
             }.navigationTitle(structure.name)
     }
 }
@@ -28,3 +30,4 @@ struct DataStructureDetail_Previews: PreviewProvider {
         DataStructureDetail(structure: DataStructureList.list.first!)
     }
 }
+
