@@ -22,7 +22,7 @@ struct MainView:View{
                 Image("Quiz")
                 Text("Quiz")
             }
-            RankingList(settings: gameSettings).tabItem{
+            RankingView(settings: gameSettings).tabItem{
                 Image("ranking")
                 Text("Ranking")
             }

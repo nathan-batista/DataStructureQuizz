@@ -17,6 +17,8 @@
  confetti icon : https://www.flaticon.com/free-icon/party_2824564?term=confetti&page=1&position=20&page=1&position=20&related_id=2824564&origin=tag
  
  Ranking icon https://www.flaticon.com/free-icon/ranking_3629632?term=ranking&page=1&position=1&page=1&position=1&related_id=3629632&origin=tag
+ Star : https://www.flaticon.com/premium-icon/star_2893811?term=star&page=1&position=3&page=1&position=3&related_id=2893811&origin=tag
+ 
  */
 
 
@@ -71,7 +73,8 @@ struct QuestionList{
         Question(question: "Which data structure can be used to do process scheduling?", option: ["Array","Stack","Queue"], answer: "Queue"),
         Question(question: "Which Data Structure can be used to do parentheses balancing?", option: ["Array","Stack","Queue"], answer: "Stack"),
         Question(question: "Which Data Structures take O(n) to removing an element?", option: ["Array-Stack","Stack-Queue","Queue-Array"], answer: "Queue-Array"),
-        Question(question: "Which Data Structure takes O(log n) to search for an element if balanced?", option: ["Binary Search Tree","Stack","Queue"], answer: "Binary Search Tree")
+        Question(question: "Which Data Structure takes O(log n) to search for an element if balanced?", option: ["Binary Search Tree","Stack","Queue"], answer: "Binary Search Tree"),
+        Question(question: "Given an array [John, Mary, Richard], which index we must use to access John?", option: ["1","0","2"], answer: "0")
     ].shuffled()
     
     func verifyAnswerIsCorrect(_ text: String, _ answer: String) -> Bool {

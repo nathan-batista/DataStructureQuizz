@@ -7,12 +7,12 @@
 
 
 import SwiftUI
+import UIKit
 
 
 struct QuizzView:View{
     @State var question:Question
     @State var endGame = false
-    @State var isActive = false
     @ObservedObject var settings:GameSettings
     var body: some View{
         ZStack{
@@ -29,8 +29,8 @@ struct QuizzView:View{
                 }
                 Spacer()
                 VStack(spacing:15){
-                    ForEach(question.option, id: \.self ){ option in
-                        QuestionButton(option: option, answer: question.answer, question: $question, isActive: $isActive, endGame: $endGame, settings: settings)
+                    ForEach(question.option.shuffled(), id: \.self ){ option in
+                        QuestionButton(option: option, answer: question.answer, question: $question, endGame: $endGame, settings: settings)
                     }
                 
                     NavigationLink(destination:Congratulations(settings: settings),isActive:$endGame){
@@ -40,6 +40,7 @@ struct QuizzView:View{
                 .padding(.bottom,30)
             }
         }.navigationTitle("Question \(settings.index+1)")
+            .background(Color.init(UIColor.systemGray6))
     }
 }
 
@@ -62,7 +63,6 @@ struct QuestionButton:View{
     var option:String
     var answer:String
     @Binding var question:Question
-    @Binding var isActive:Bool
     @Binding var endGame:Bool
     @StateObject var settings:GameSettings
     var body: some View{
@@ -73,14 +73,17 @@ struct QuestionButton:View{
                 }
             }
             settings.previousIndex = settings.index
-            settings.index = settings.index < (QuestionList.questions.count - 1) ? settings.index+1 : settings.index
-            question = QuestionList.questions[settings.index]
-            if(settings.index == (QuestionList.questions.count - 1)){
+            settings.index += 1
+            if(settings.index == (QuestionList.questions.count)){
                 settings.ranking.append(Ranking(score: settings.score))
                 endGame = true
+            } else {
+                question = QuestionList.questions[settings.index]
+                
             }
         },label: {
             Text(option)
+                .frame(width : UIScreen.main.bounds.width)
                 .padding(10)
                 .foregroundColor(Color.black)
                 .background(Color.blue)
