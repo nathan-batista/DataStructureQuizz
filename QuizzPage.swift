@@ -1,11 +1,3 @@
-//
-//  File.swift
-//  WWDC22Project
-//
-//  Created by Nathan Batista de Oliveira on 11/04/22.
-//
-
-
 import SwiftUI
 import UIKit
 
@@ -49,19 +41,6 @@ struct QuizzView:View{
     }
 }
 
-struct QuizzPageView : View {
-    @StateObject var gameOption:GameSettings
-    var body: some View{
-            QuizzView(question: QuestionList.questions.first!, settings: gameOption)
-    }
-}
-
-struct QuizzPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizzPageView(gameOption: GameSettings())
-    }
-}
-
 struct QuestionButton:View{
     var option:String
     var answer:String
@@ -95,5 +74,22 @@ struct QuestionButton:View{
         )
     }
 }
+
+
+
+struct QuizzPageView : View {
+    @StateObject var gameOption:GameSettings
+    var body: some View{
+        QuizzView(question: QuestionList.questions.first!,endGame: gameOption.index >= QuestionList.questions.count - 1 ? true : false,  settings: gameOption)
+    }
+}
+
+struct QuizzPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuizzPageView(gameOption: GameSettings())
+    }
+}
+
+
 
 

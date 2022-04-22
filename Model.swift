@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  WWDC22Project
-//
-//  Created by Nathan Batista de Oliveira on 11/04/22.
-//
-
 /*Icons
  Binary Search Tree :https://iconscout.com/icon/flowchart-4185679
  Array : https://www.flaticon.com/free-icon/matrix_3815250
@@ -18,7 +11,8 @@
  
  Ranking icon https://www.flaticon.com/free-icon/ranking_3629632?term=ranking&page=1&position=1&page=1&position=1&related_id=3629632&origin=tag
  Star : https://www.flaticon.com/premium-icon/star_2893811?term=star&page=1&position=3&page=1&position=3&related_id=2893811&origin=tag
- 
+ Shopping Basket : https://br.freepik.com/vetores-gratis/cesta-de-compras-com-ilustracao-vetorial-de-comida-carrinho-com-compra-do-produto-no-supermercado-ilustracao-vetorial_11059441.htm#query=cesta%20supermercado&position=0&from_view=keyword
+
  */
 
 

@@ -4,7 +4,6 @@ struct ContentView: View {
     var structures:[DataStructure] = DataStructureList.list
     var body: some View {
         ZStack{
-            //Color.init(UIColor.systemGray6)
             NavigationView{
                 List(structures, id: \.id){ structure in
                     NavigationLink(destination: DataStructureDetail(structure: structure), label: {

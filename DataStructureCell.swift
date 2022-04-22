@@ -1,9 +1,3 @@
-//
-//  File.swift
-//  WWDC22Project
-//
-//  Created by Nathan Batista de Oliveira on 11/04/22.
-//
 
 import SwiftUI
 
