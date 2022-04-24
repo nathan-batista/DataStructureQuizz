@@ -13,13 +13,13 @@
  Star : https://www.flaticon.com/premium-icon/star_2893811?term=star&page=1&position=3&page=1&position=3&related_id=2893811&origin=tag
  Shopping Basket : https://br.freepik.com/vetores-gratis/cesta-de-compras-com-ilustracao-vetorial-de-comida-carrinho-com-compra-do-produto-no-supermercado-ilustracao-vetorial_11059441.htm#query=cesta%20supermercado&position=0&from_view=keyword
 
+ About data structures: https://www.geeksforgeeks.org
  */
 
 
 
 import Foundation
 import SwiftUI
-import UIKit
 
 struct DataStructure{
     var name:String
@@ -85,20 +85,5 @@ class GameSettings:ObservableObject{
     @Published var index:Int = 0
     @Published var previousIndex:Int = -1
     var ranking:[Ranking] = []
-
-}
-
-
-struct NavigationConfigurator: UIViewControllerRepresentable {
-    var configure: (UINavigationController) -> Void = { _ in }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
-        UIViewController()
-    }
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
-        if let nc = uiViewController.navigationController {
-            self.configure(nc)
-        }
-    }
 
 }

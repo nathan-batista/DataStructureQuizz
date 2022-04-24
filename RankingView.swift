@@ -40,7 +40,7 @@ struct RankingList : View{
     @StateObject var settings:GameSettings
     var body:some View{
         ZStack{
-            Color.init(UIColor.systemGray6)
+            Color("backgroundColor")
             VStack{
                 if(!settings.ranking.isEmpty){
                     Text("Scores")

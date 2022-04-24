@@ -4,12 +4,13 @@ import SwiftUI
 struct DataStructureDetail:View{
     var structure:DataStructure
     init(structure structure1:DataStructure){
-        UINavigationBar.appearance().backgroundColor = UIColor.systemGray6
+        UINavigationBar.appearance().backgroundColor = UIColor(named: "backgroundColor")
         self.structure = structure1
     }
     var body: some View {
         ZStack{
-            Color.init(UIColor.systemGray6)
+            Color("backgroundColor")
+                .ignoresSafeArea()
             VStack(spacing:10){
                 Image(structure.image)
                     .resizable()
@@ -31,18 +32,5 @@ struct DataStructureDetail_Previews: PreviewProvider {
         DataStructureDetail(structure: DataStructureList.list.first!)
     }
 }
-
-/*
-if changed{
-    if currentAmout.degrees < 330 && currentAmount.degrees >= 180{
-        changeColor()
-        changed.toogle()
-    }
-} else {
-    if currentAmount >= 330 {
-        changeColor()
-        changed.toogle()
-    }
-}*/
 
 

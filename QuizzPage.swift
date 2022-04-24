@@ -7,7 +7,8 @@ struct QuizzView:View{
     @StateObject var settings:GameSettings
     var body: some View{
         ZStack{
-            Color.init(UIColor.systemGray6)
+            Color("backgroundColor")
+                .ignoresSafeArea()
             if !endGame {
                 VStack{
                     Text("Question \(settings.index + 1)")
@@ -19,7 +20,7 @@ struct QuizzView:View{
                             .font(.title3)
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.trailing,20)
+                            .padding(.trailing,30)
                         Text(question.question)
                             .font(.title2)
                             .fontWeight(.bold)
@@ -67,8 +68,8 @@ struct QuestionButton:View{
             Text(option)
                 .frame(width : UIScreen.main.bounds.width)
                 .padding(10)
-                .foregroundColor(Color.black)
-                .background(Color.blue)
+                .foregroundColor(Color.white)
+                .background(Color.init(red: Double(60)/Double(255), green: Double(124)/Double(255), blue: Double(109)/Double(255)))
                 .cornerRadius(10)
             }
         )

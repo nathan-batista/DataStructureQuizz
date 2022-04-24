@@ -23,11 +23,10 @@ struct MainView:View{
             .onAppear {
                 let appearance = UITabBarAppearance()
                 appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-                appearance.backgroundColor = UIColor.systemGray6
+                appearance.backgroundColor = UIColor(named: "backgroundColor")
                 UITabBar.appearance().standardAppearance = appearance
               UITabBar.appearance().scrollEdgeAppearance = appearance
-            }
-        
+            }.accentColor(Color(uiColor: UIColor.blue))
     }
 }
 
