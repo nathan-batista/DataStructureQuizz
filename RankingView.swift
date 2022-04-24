@@ -41,6 +41,7 @@ struct RankingList : View{
     var body:some View{
         ZStack{
             Color("backgroundColor")
+                .ignoresSafeArea()
             VStack{
                 if(!settings.ranking.isEmpty){
                     Text("Scores")
